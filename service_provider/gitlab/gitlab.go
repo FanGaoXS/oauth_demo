@@ -9,11 +9,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"oauth-demo/environment"
 )
 
-const (
-	ClientId     = "193ef592ac3ca29aef70eaeacc40047b2810c73b7d9120d52fc47273cd94b34b"
-	ClientSecret = "d96fceea906cd5d1aa1e347361358cd5cae0bc0fd225101b586c366fd5e395b5"
+var (
+	ClientId     = environment.Env.GitlabClientID
+	ClientSecret = environment.Env.GitlabSecretID
 )
 
 type UserInfo struct {

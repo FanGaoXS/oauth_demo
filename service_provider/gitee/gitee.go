@@ -34,6 +34,7 @@ func Authorize(c *gin.Context) {
 	values.Set("response_type", "code")
 	u.RawQuery = values.Encode()
 
+	// redirect to -> https://gitee.com/oauth/authorize?client_id={CLIENT_ID}&redirect_uri=http://localhost:8090/gitee/oauth/callback&response_type=code
 	c.Redirect(http.StatusMovedPermanently, u.String())
 	return
 }
@@ -53,6 +54,7 @@ func Callback(c *gin.Context) {
 	req, _ := http.NewRequest(http.MethodPost, u.String(), nil)
 	req.Header.Set("accept", "application/json")
 	res, _ := client.Do(req)
+	// HTTP POST -> https://gitee.com/oauth/token?client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&code={CODE}&grant_type=authorization_code&redirect_uri=http://localhost:8090/gitee/oauth/callback
 	defer res.Body.Close()
 	bytes, _ := ioutil.ReadAll(res.Body)
 	fmt.Println(string(bytes))
@@ -74,6 +76,7 @@ func RefreshToken(c *gin.Context) {
 	client := http.DefaultClient
 	req, _ := http.NewRequest(http.MethodPost, u.String(), nil)
 	res, _ := client.Do(req)
+	// HTTP POST -> https://gitee.com/oauth/token?grant_type=refresh_token&refresh_token={REFRESH_TOKEN}
 	defer res.Body.Close()
 	bytes, _ := ioutil.ReadAll(res.Body)
 	fmt.Println(string(bytes))
@@ -96,6 +99,7 @@ func Userinfo(c *gin.Context) {
 	req, _ := http.NewRequest(http.MethodGet, u.String(), nil)
 	req.Header.Set("accept", "application/json")
 	res, _ := client.Do(req)
+	// HTTP GET -> https://gitee.com/api/v5/user?access_token={TOKEN}
 	defer res.Body.Close()
 	bytes, _ := ioutil.ReadAll(res.Body)
 	fmt.Println(string(bytes))

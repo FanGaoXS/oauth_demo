@@ -10,6 +10,19 @@ git clone https://github.com/FanGaoXS/oauth_demo.git
 cd oauth_demo 
 ```
 
+## copy environment file
+
+```bash
+cp env.example .env
+```
+
+## update environment config
+
+```
+GITHUB_CLIENT_ID = {your github client id}
+...
+```
+
 ## install dependency
 
 ```bash

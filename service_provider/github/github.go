@@ -37,10 +37,6 @@ func Authorize(c *gin.Context) {
 	return
 }
 
-// Callback
-// 1 来自服务提供商返回的授权码
-// 2 使用clientId、clientSecret、授权码code向服务商请求令牌
-// 3 向服务提供商发起POST请求以获取token
 func Callback(c *gin.Context) {
 	code := c.Query("code")
 	u, _ := url.Parse("https://github.com/login/oauth/access_token")
@@ -64,8 +60,6 @@ func Callback(c *gin.Context) {
 	return
 }
 
-// Userinfo
-// 使用token获取userinfo
 func Userinfo(c *gin.Context) {
 	token := c.Query("token")
 	u, _ := url.Parse("https://api.github.com/user")

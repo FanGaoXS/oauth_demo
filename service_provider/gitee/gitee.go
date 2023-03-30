@@ -26,6 +26,8 @@ type UserInfo struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+// Authorize
+// 向服务提供商gitee发起获得授权码的申请
 func Authorize(c *gin.Context) {
 	u, _ := url.Parse("https://gitee.com/oauth/authorize")
 	values := u.Query()
@@ -39,6 +41,8 @@ func Authorize(c *gin.Context) {
 	return
 }
 
+// Callback
+// 用户同意授权后
 func Callback(c *gin.Context) {
 	code := c.Query("code")
 	u, _ := url.Parse("https://gitee.com/oauth/token")

@@ -29,6 +29,7 @@ type UserInfo struct {
 // Authorize
 // 向服务提供商gitee发起获得授权码的申请
 func Authorize(c *gin.Context) {
+	// 将 clientId, redirect_uri, response_type 拼凑到向gitee发起请求的url上并重定向
 	u, _ := url.Parse("https://gitee.com/oauth/authorize")
 	values := u.Query()
 	values.Set("client_id", ClientId)
